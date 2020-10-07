@@ -419,5 +419,8 @@
         "security/detect-object-injection": "off",
         "security/detect-possible-timing-attacks": "error",
         "security/detect-pseudoRandomBytes": "error"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
     }
 }

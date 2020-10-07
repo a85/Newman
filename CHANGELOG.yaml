@@ -1,3 +1,9 @@
+master:
+    new features:
+     - >-
+        GH-2509 Added a new option `no-executions-summary` in newman to skip addition of request,
+        response to summary executions report generated for specified reporter.
+
 5.2.0:
   date: 2020-09-01
   new features:

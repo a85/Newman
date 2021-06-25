@@ -44,7 +44,7 @@
     "cli-progress": "3.9.0",
     "cli-table3": "0.6.0",
     "colors": "1.4.0",
-    "commander": "7.2.0",
+    "commander": "8.0.0",
     "csv-parse": "4.16.0",
     "eventemitter3": "4.0.7",
     "filesize": "6.3.0",

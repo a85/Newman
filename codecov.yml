@@ -11,7 +11,7 @@ coverage:
     project:
       # coverage status for whole project
       default:
-        target: auto    # use coverage of base commit as target
+        target: auto    # use coverage of base commit as target 
         threshold: 1%   # allow a little drop
 
       # coverage status for unit tests

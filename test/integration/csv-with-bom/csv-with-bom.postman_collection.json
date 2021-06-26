@@ -11,7 +11,7 @@
           "pm.test(\"CSV parsing tests\", function () {",
           "    pm.expect(data.c1).to.eql('123');",
           "    pm.expect(data.c2).to.eql('foo \"bar\" baz');",
-          "    pm.expect(data.c3).to.be.undefined;",
+          "    pm.expect(data.c3).to.be.undefined;",  
           "});"
         ],
         "type": "text/javascript"

@@ -15,7 +15,7 @@ var fs = require('fs'),
     INP_DIR = 'lib/**/*.js',
     OUT_FILE = 'REFERENCE.md',
     OUT_PATH = OUT_DIR + '/' + OUT_FILE,
-    SUCCESS_MESSAGE = colors.green.bold(`- wiki generated at "${OUT_PATH}"`);
+    SUCCESS_MESSAGE = colors.green.bold(`- wiki generated at "${OUT_PATH}"`);  
 
 module.exports = function (exit) {
     console.info(colors.yellow.bold('Generating wiki using jsdoc2md...'));

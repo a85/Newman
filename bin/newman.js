@@ -15,6 +15,13 @@ program
     .addHelpCommand(false)
     .version(version, '-v, --version');
 
+// The dashboard command will open the dashboard that will control all newman runs
+program
+    .command('dashboard')
+    .action(() => {
+        newman.dashboard();
+    });
+
 // The `run` command allows you to specify a collection to be run with the provided options.
 program
     .command('run <collection>')

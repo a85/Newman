@@ -21,6 +21,7 @@ module.exports = function (exit) {
     var Mocha = require('mocha');
 
     // add all spec files to mocha
+    // eslint-disable-next-line consistent-return
     recursive(SPEC_SOURCE_DIR, function (err, files) {
         if (err) {
             console.error(err);

@@ -464,6 +464,7 @@ To enable JSON reporter, provide `--reporters json` as a CLI option.
 | CLI Option  | Description       |
 |-------------|-------------------|
 | `--reporter-json-export <path>` | Specify a path where the output JSON file will be written to disk. If not specified, the file will be written to `newman/` in the current working directory. If the specified path does not exist, it will be created. However, if the specified path is a pre-existing directory, the report will be generated in that directory. |
+| `--reporter-json-skip-responses` | Skip API responses when writing output to file | 
 
 ### JUNIT/XML Reporter
 The built-in JUnit reporter can output a summary of the collection run to a JUnit compatible XML file. To enable the JUNIT reporter, provide

@@ -4,9 +4,10 @@ LABEL maintainer="Postman Labs <help@postman.com>"
 ARG NODE_VERSION=10
 ARG NEWMAN_VERSION
 
-# Bail out early if NODE_VERSION is not provided
-RUN if [ ! $(echo $NEWMAN_VERSION | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+$") ]; then \
-        echo "\033[0;31mA valid semver Newman version is required in the NEWMAN_VERSION build-arg\033[0m"; \
+# Bail out early if NEWMAN_VERSION is not provided
+RUN if ! echo "v$NEWMAN_VERSION" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$'; then \
+        printf '\e[0;31m%s\e[0m\n' \
+               "A valid semver is required in --build-arg NEWMAN_VERSION='$NEWMAN_VERSION'"; \
         exit 1; \
     fi
 

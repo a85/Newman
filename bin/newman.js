@@ -22,7 +22,9 @@ program
     .usage('<collection> [options]')
     .option('-e, --environment <path>', 'Specify a URL or path to a Postman Environment')
     .option('-g, --globals <path>', 'Specify a URL or path to a file containing Postman Globals')
-    .option('-r, --reporters [reporters]', 'Specify the reporters to use for this run', util.cast.csvParse, ['cli'])
+    .option('-r, --reporters [reporters...]',
+        'Specify the reporters to use for this run',
+        util.cast.reporterParse, ['cli'])
     .option('-n, --iteration-count <n>', 'Define the number of iterations to run', util.cast.integer)
     .option('-d, --iteration-data <path>', 'Specify a data file to use for iterations (either JSON or CSV)')
     .option('--folder <path>',

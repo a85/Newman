@@ -221,7 +221,7 @@ describe('cli parser', function () {
                 '--reporter-cli-no-summary ' +
                 '--reporter-cli-no-success-assertions ' +
                 '--iteration-count 23 ' +
-                '--reporters json ' +
+                '--reporters json, progress ' +
                 '--color on ' +
                 '--delay-request 12000 ' +
                 '--timeout 10000 ' +
@@ -269,6 +269,7 @@ describe('cli parser', function () {
                 expect(opts.color).to.equal('on');
 
                 expect(opts.reporters).to.contain('json');
+                expect(opts.reporters).to.contain('progress');
                 expect(opts.reporters).to.not.contain('verbose');
                 expect(opts.reporters).to.not.contain('junit');
 

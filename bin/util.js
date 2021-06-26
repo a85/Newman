@@ -1,4 +1,6 @@
-const _ = require('lodash');
+const _ = require('lodash'),
+    reporters = [];
+
 
 module.exports = {
 
@@ -72,6 +74,29 @@ module.exports = {
          */
         csvParse: (list) => {
             return _.split(list, ',');
+        },
+
+        /**
+         * Helper to parse variadic parameters for reporters to an array.
+         *
+         * eg. item1,item2
+         *
+         * @param {String} list - The comma separated parameters.
+         * @returns {String[]} - [item1, item2] - The array representation of the passed parameters.
+         */
+        reporterParse: (list) => {
+            if (list.includes(',')) {
+                list.split(',').forEach((name) => {
+                    if (name.length) {
+                        reporters.push(name);
+                    }
+                });
+            }
+            else {
+                reporters.push(list);
+            }
+
+            return reporters;
         },
 
         colorOptions: (value) => {

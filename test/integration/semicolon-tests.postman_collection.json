@@ -1,10 +1,9 @@
 {
-  "variables": [],
   "info": {
+    "_postman_id": "e8a5276f-dc77-4b8b-98ac-d5f768ddc7e5",
     "name": "Response headers with semicolons are handled correctly",
-    "_postman_id": "f1639220-14aa-90da-0634-5f6367323dd2",
     "description": "A test to check for the proper retrieval of headers from a specified source",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -13,18 +12,42 @@
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
-            "exec": "tests[\"Test1: Content-Type is 'application/json;  charset=utf-8'\"] = responseHeaders[\"Content-Type\"] === \"application/json; charset=utf-8\";\ntests[\"Test2: Content-Type is 'application/json; charset=utf-8'\"] = responseHeaders.hasOwnProperty(\"Content-Type\") && 'application/json; charset=utf-8' === responseHeaders[\"Content-Type\"];\n\n\n\ntests[\"Test3: Content-Type is 'application/json; charset=utf-8'\"] = responseHeaders[\"Content-Type\"] === \"application/json;\\ charset=utf-8\";\ntests[\"Test4: Content-Type is 'application/json; charset=utf-8'\"] = responseHeaders.hasOwnProperty(\"Content-Type\") && 'application/json;\\ charset=utf-8' === responseHeaders[\"Content-Type\"];\n\n"
+            "id": "ef35cf5b-7d5a-43ae-84c6-04714e12b5d6",
+            "exec": [
+              "pm.test(\"Content-Type is 'application/json; charset=utf-8'\", function () {",
+              "    pm.response.to.have.header(\"Content-Type\");",
+              "    pm.response.to.be.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
           }
         }
       ],
       "request": {
-        "url": "https://postman-echo.com/response-headers?Content-Type=application%2Fjson%3B%20%20charset%3Dutf-8",
         "method": "GET",
         "header": [],
+        "url": {
+          "raw": "https://postman-echo.com/response-headers?Content-Type=application%2Fjson%3B%20charset%3Dutf-8",
+          "protocol": "https",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "response-headers"
+          ],
+          "query": [
+            {
+              "key": "Content-Type",
+              "value": "application%2Fjson%3B%20charset%3Dutf-8"
+            }
+          ]
+        },
         "description": "Receives a semicolon header from dump.getpost"
       },
       "response": []
     }
-  ]
+  ],
+  "protocolProfileBehavior": {}
 }

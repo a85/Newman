@@ -49,6 +49,7 @@ describe('cli parser', function () {
                         globalVar: [],
                         envVar: [],
                         folder: [],
+                        preserveOrder: false,
                         insecureFileRead: true,
                         color: 'auto',
                         timeout: 0,
@@ -70,7 +71,6 @@ describe('cli parser', function () {
                     expect(opts.iterationCount, 'should have iterationCount of 2').to.equal(2);
                     expect(opts.collection).to.equal('myCollection.json');
                     expect(opts.environment).to.equal('env.json');
-
                     done();
                 });
         });

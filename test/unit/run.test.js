@@ -282,25 +282,26 @@ describe('run module', function () {
             });
 
             it('should handle options.folder passed as string correctly', function (done) {
-                run({ collection: {}, folder: 'f1' }, function (options) {
-                    expect(options).to.have.deep.property('entrypoint', { execute: 'f1' });
+                run({ collection: {}, folder: 'f1', preserveOrder: false }, function (options) {
+                    expect(options).to.have.deep.property('entrypoint', { execute: 'f1', preserveOrder: false });
                     done();
                 });
             });
 
             it('should use multipleIdOrName strategy if options.folder is passed as an array', function (done) {
-                run({ collection: {}, folder: ['f1', 'f2'] }, function (options) {
+                run({ collection: {}, folder: ['f1', 'f2'], preserveOrder: true }, function (options) {
                     expect(options).to.have.deep.property('entrypoint', {
                         execute: ['f1', 'f2'],
-                        lookupStrategy: 'multipleIdOrName'
+                        lookupStrategy: 'multipleIdOrName',
+                        preserveOrder: true
                     });
                     done();
                 });
             });
 
             it('should not use multipleIdOrName strategy if options.folder is a single item array', function (done) {
-                run({ collection: {}, folder: ['f1'] }, function (options) {
-                    expect(options).to.have.property('entrypoint').to.eql({ execute: 'f1' });
+                run({ collection: {}, folder: ['f1'], preserveOrder: false }, function (options) {
+                    expect(options).to.have.property('entrypoint').to.eql({ execute: 'f1', preserveOrder: false });
                     done();
                 });
             });

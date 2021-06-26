@@ -28,6 +28,8 @@ program
     .option('--folder <path>',
         'Specify the folder to run from a collection. Can be specified multiple times to run multiple folders',
         util.cast.memoize, [])
+    .option('--preserve-order',
+        'Specify if the order of folder arguments in the command line should be preserved.', false)
     .option('--global-var <value>',
         'Allows the specification of global variables via the command line, in a key=value format',
         util.cast.memoizeKeyVal, [])

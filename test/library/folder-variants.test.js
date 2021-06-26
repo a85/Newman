@@ -30,6 +30,30 @@ describe('folder variants', function () {
         });
     });
 
+    it('should not preserve the order if not specified', function (done) {
+        newman.run({
+            collection: collection,
+            folder: ['R3', 'R1']
+        }, function (err, summary) {
+            expect(err).to.be.null;
+            expect(summary.run.executions.map((e) => { return e.item.name; })).to.eql(['R1', 'R3']);
+            done();
+        });
+    });
+
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('should preserve the order if specified', function (done) {
+        newman.run({
+            collection: collection,
+            folder: ['R3', 'R1'],
+            preserveOrder: true
+        }, function (err, summary) {
+            expect(err).to.be.null;
+            expect(summary.run.executions.map((e) => { return e.item.name; })).to.eql(['R3', 'R1']);
+            done();
+        });
+    });
+
     it('should skip the collection run in case folder name is invalid', function (done) {
         newman.run({
             collection: collection,

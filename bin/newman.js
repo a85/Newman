@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 require('../lib/node-version-check'); // @note that this should not respect CLI --silent
 
 const _ = require('lodash'),
@@ -27,6 +28,8 @@ program
     .option('-d, --iteration-data <path>', 'Specify a data file to use for iterations (either JSON or CSV)')
     .option('--folder <path>',
         'Specify the folder to run from a collection. Can be specified multiple times to run multiple folders',
+        util.cast.memoize, [])
+    .option('--item-from-folder <path>', 'Specify the item and its parent folder',
         util.cast.memoize, [])
     .option('--global-var <value>',
         'Allows the specification of global variables via the command line, in a key=value format',
@@ -94,6 +97,15 @@ program.on('command:*', (command) => {
     console.error(`error: invalid command \`${command}\`\n`);
     program.help();
 });
+
+program
+    .command('run-request <url>')
+    .usage('<url> [options]')
+    .option('-m,--method', 'Method of the request', 'GET')
+    .action((url, command) => {
+        console.info(url);
+        console.info(command);
+    });
 
 /**
  * Starts the script execution.

@@ -239,4 +239,40 @@ describe('Newman run options', function () {
             });
         });
     });
+
+    describe('Option --item-from-folder', function () {
+        it('should work correctly when path is correct', function (done) {
+            newman.run({
+                collection: 'test/integration/parsing-folder-paths/parsing-folder-paths.postman_collection.json',
+                itemFromFolder: 'firstpost/first'
+            }, function (err, summary) {
+                expect(err).to.be.null;
+                expect(summary).to.be.ok;
+                done();
+            });
+        });
+
+        it('should work correctly when path is incorrect', function (done) {
+            newman.run({
+                collection: 'test/integration/parsing-folder-paths/parsing-folder-paths.postman_collection.json',
+                itemFromFolder: 'firstpost/third'
+            }, function (err, summary) {
+                expect(err).to.be.null;
+                expect(summary).to.be.ok;
+                done();
+            });
+        });
+
+        it('should work override folder option when both are specified', function (done) {
+            newman.run({
+                collection: 'test/integration/parsing-folder-paths/parsing-folder-paths.postman_collection.json',
+                itemFromFolder: 'firstpost/third',
+                folder: 'post'
+            }, function (err, summary) {
+                expect(err).to.be.null;
+                expect(summary).to.be.ok;
+                done();
+            });
+        });
+    });
 });

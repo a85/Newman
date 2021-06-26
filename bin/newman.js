@@ -28,6 +28,9 @@ program
     .option('--folder <path>',
         'Specify the folder to run from a collection. Can be specified multiple times to run multiple folders',
         util.cast.memoize, [])
+    .option('--exclude-folder <path>',
+        'Specify the folder to exclude from a collection. Can be specified multiple times to exclude multiple folders',
+        util.cast.memoize, [])
     .option('--global-var <value>',
         'Allows the specification of global variables via the command line, in a key=value format',
         util.cast.memoizeKeyVal, [])

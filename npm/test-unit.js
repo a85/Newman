@@ -10,6 +10,7 @@ require('colors');
 // set directories and files for test and coverage report
 var path = require('path'),
     expect = require('chai').expect,
+    newman = require('../index'),
     recursive = require('recursive-readdir'),
 
     SPEC_SOURCE_DIR = path.join(__dirname, '..', 'test', 'unit');
@@ -35,6 +36,7 @@ module.exports = function (exit) {
         }).forEach(mocha.addFile.bind(mocha));
 
         // start the mocha run
+        global.newman = newman;
         global.expect = expect; // for easy reference
 
         mocha.run(function (runError) {

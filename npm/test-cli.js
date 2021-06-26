@@ -45,7 +45,6 @@ module.exports = function (exit) {
         mocha.run(function (err) {
             delete global.expect; // clear references and overrides
             global.exec = _exec;
-
             exit(err || process.exitCode ? 1 : 0);
         });
         mocha = null; // cleanup

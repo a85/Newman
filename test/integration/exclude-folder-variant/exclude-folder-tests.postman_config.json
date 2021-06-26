@@ -1,0 +1,6 @@
+{
+    "run": {
+      "excludeFolder" : ["R1","R3"]
+    }
+}
+  

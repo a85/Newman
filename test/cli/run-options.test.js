@@ -125,4 +125,15 @@ describe('CLI run options', function () {
             });
         });
     });
+
+    describe('Option --ignore-iteration ', function () {
+        it('should work correctly when specified', function (done) {
+            // eslint-disable-next-line max-len
+            exec('node ./bin/newman.js run test/integration/steph/steph.postman_collection.json -d test/integration/steph/steph.postman_data.json --ignore-iteration 1', function (code, stdout, stderr) {
+                expect(code, 'should have zero exit code').to.equal(0);
+                expect(stderr).to.be.empty;
+                done();
+            });
+        });
+    });
 });

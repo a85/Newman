@@ -1,5 +1,7 @@
 var _ = require('lodash'),
-    runtimeVersion = require('../../package.json').dependencies['postman-runtime'];
+    runtimeVersion = require('../../package.json').dependencies['postman-runtime'],
+    path = require('path'),
+    fs = require('fs');
 
 describe('Newman run options', function () {
     var collection = 'test/fixtures/run/single-get-request.json';
@@ -235,6 +237,31 @@ describe('Newman run options', function () {
             }, function (err, summary) {
                 expect(err).to.be.null;
                 expect(summary).to.be.ok;
+                done();
+            });
+        });
+    });
+
+    describe('Option --ignore-iteration ', function () {
+        var iterationProperty = 'run.stats.iterations.total',
+            collectionRunPath = path.join(__dirname, '..', '..', 'out', 'iteration-count-test.json');
+
+        it('should work correctly when specified', function (done) {
+            newman.run({
+                collection: 'test/integration/steph/steph.postman_collection.json',
+                iterationData: 'test/integration/steph/steph.postman_data.json',
+                reporters: ['json'],
+                reporter: { json: { export: collectionRunPath } },
+                ignoreIteration: 1
+            }, function (err) {
+                if (err) { return done(err); }
+
+                var collectionRun;
+
+                try { collectionRun = JSON.parse(fs.readFileSync(collectionRunPath).toString()); }
+                catch (e) { console.error(e); }
+
+                expect(_.get(collectionRun, iterationProperty), 'should have 1 iterations').to.equal(1);
                 done();
             });
         });

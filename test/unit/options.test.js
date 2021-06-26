@@ -97,4 +97,27 @@ describe('options', function () {
             done();
         });
     });
+
+    describe('Option --ignore-iteration ', function () {
+        it('should be undefined by default', function (done) {
+            options({
+                iterationData: './test/fixtures/run/spaces/data.json'
+            }, function (err, result) {
+                expect(err).to.be.null;
+                expect(result.igonoreiteration).to.be.undefined;
+                done();
+            });
+        });
+
+        it('should work correctly when specified', function (done) {
+            options({
+                iterationData: './test/fixtures/run/spaces/data.json',
+                ignoreiteration: 1
+            }, function (err, result) {
+                expect(err).to.be.null;
+                expect(result.ignoreiteration).to.equal(1);
+                done();
+            });
+        });
+    });
 });

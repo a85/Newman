@@ -114,6 +114,48 @@ describe('Newman run options', function () {
         });
     });
 
+    it('should correctly handle invalid json iteration data', function (done) {
+        newman.run({
+            collection: 'test/fixtures/run/failed-request.json',
+            iterationData: 'test/integration/steph/steph.invalid_json_data.json'
+        }, function (err, summary) {
+            expect(err).to.be.ok;
+            expect(err.message).to.include('iteration data could not be loaded\n' +
+                ' Unexpected token \'{\'');
+            expect(summary).to.not.be.ok;
+
+            done();
+        });
+    });
+
+    it('should correctly handle invalid csv iteration data', function (done) {
+        newman.run({
+            collection: 'test/fixtures/run/failed-request.json',
+            iterationData: 'test/integration/steph/steph.invalid_csv_data.csv'
+        }, function (err, summary) {
+            expect(err).to.be.ok;
+            expect(err.message).to.include('iteration data could not be loaded\n' +
+                ' Quote Not Closed: the parsing is finished with an opening quote');
+            expect(summary).to.not.be.ok;
+
+            done();
+        });
+    });
+
+    it('should correctly handle invalid file types for iteration data', function (done) {
+        newman.run({
+            collection: 'test/fixtures/run/failed-request.json',
+            iterationData: 'test/integration/steph/steph.postman_data.txt'
+        }, function (err, summary) {
+            expect(err).to.be.ok;
+            expect(err.message).to.include('iteration data could not be loaded\n' +
+                ' Invalid file for iteration data. Only use .json/.csv files');
+            expect(summary).to.not.be.ok;
+
+            done();
+        });
+    });
+
     it('should correctly handle invalid iteration data', function (done) {
         newman.run({
             collection: 'test/fixtures/run/failed-request.json',

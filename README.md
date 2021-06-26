@@ -145,6 +145,10 @@ For more details on [Reporters](#reporters) and writing your own [External Repor
 - `-n <number>`, `--iteration-count <number>`<br />
   Specifies the number of times the collection has to be run when used in conjunction with iteration data file.
 
+- `--iteration-data-range <number...>` <br  />
+  Specify a start index and an end index to select a range of iterations from iteration data file to run. If either of index is missing or is invalid then default values of 0 and iteration data size will be used respectively. To select the iteration data from start to end - 1 use
+  --iteration-data-range start end
+
 - `--folder <name>`<br />
   Run requests within a particular folder/folders or specific requests in a collection. Multiple folders or requests can be specified by using
   --folder multiple times, like so: --folder f1 --folder f2 --folder r1 --folder r2.

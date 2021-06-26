@@ -1,47 +1,81 @@
-### Newman v5 has been released. Check the [migration guide](MIGRATION.md#migrating-from-v4-to-v5) and [changelog](https://github.com/postmanlabs/newman/blob/v5.0.0/CHANGELOG.yaml#L1) for more details.
+<div align="center">
+<h1 >Newman</h1>
+<i>The CLI companion for Postman.</i>
+</div>
+<br>
+<p align="center">
+  <a href="https://www.postman.com/"><img src="https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png" /></a>
+  <br>
+  <br>
+  <i>Newman is a command-line collection runner for Postman. It allows you to effortlessly run and test a Postman collection directly from the command-line.<br>It is built with extensibility in mind so that you can easily integrate it with your continuous integration servers and build systems.
+  </i>
+  <br>
+  </p>
+<br>
 
-<a href="https://www.postman.com/"><img src="https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png" /></a><br />
-_Manage all of your organization's APIs in Postman, with the industry's most complete API development environment._
+  [![Build Status](https://travis-ci.org/postmanlabs/newman.svg?branch=develop)](https://travis-ci.com/postmanlabs/newman) [![codecov](https://codecov.io/gh/postmanlabs/newman/branch/develop/graph/badge.svg)](https://codecov.io/gh/postmanlabs/newman) 
+![GitHub](https://img.shields.io/github/license/postmanlabs/newman)
+  <hr>
+<br>
 
-# newman <sub>_the cli companion for postman_</sub> [![Build Status](https://travis-ci.org/postmanlabs/newman.svg?branch=develop)](https://travis-ci.com/postmanlabs/newman) [![codecov](https://codecov.io/gh/postmanlabs/newman/branch/develop/graph/badge.svg)](https://codecov.io/gh/postmanlabs/newman)
+  Newman v5 has been released. Check the [migration guide](MIGRATION.md#migrating-from-v4-to-v5) & [changelog](https://github.com/postmanlabs/newman/blob/v5.0.0/CHANGELOG.yaml#L1) for more details.
 
-Newman is a command-line collection runner for Postman. It allows you to effortlessly run and test a Postman collection directly from the command-line. It is built with extensibility in mind so that you can easily integrate it with your continuous integration servers and build systems.
+<hr>
+  <p>
+  <br>
+  <strong>Manage all of your organization's APIs in Postman, with the industry's most complete API development environment.</strong>
+</p>
 
+
+<p align="center">
+  <a href="https://www.postman.com"><strong>www.postman.com</strong></a>
+</p>
+
+<hr>
 
 ## Table of contents
 
-1. [Getting Started](#getting-started)
-2. [Usage](#usage)
-    1. [Using Newman CLI](#using-newman-cli)
-    2. [Using Newman as a Library](#using-newman-as-a-library)
-    3. [Using Reporters with Newman](#using-reporters-with-newman)
-3. [Command Line Options](#command-line-options)
-    1. [newman-options](#newman-options)
-    2. [newman-run](#newman-run-collection-file-source-options)
-    3. [SSL](#ssl)
-    4. [Configuring Proxy](#configuring-proxy)
-4. [API Reference](#api-reference)
-    1. [newman run](#newmanrunoptions-object--callback-function--run-eventemitter)
-    2. [Run summary object](#newmanruncallbackerror-object--summary-object)
-    3. [Events emitted during a collection run](#newmanrunevents)
-5. [Reporters](#reporters)
-    1. [Configuring Reporters](#configuring-reporters)
-    2. [CLI Reporter](#cli-reporter)
-    3. [JSON Reporter](#json-reporter)
-    4. [JUnit Reporter](#junitxml-reporter)
-    5. [HTML Reporter](#html-reporter)
-6. [External Reporters](#external-reporters)
-    1. [Using External Reporters](#using-external-reporters)
-    2. [Creating Your Own Reporter](#creating-your-own-reporter)
-7. [File Uploads](#file-uploads)
-8. [Using Newman with the Postman API](#using-newman-with-the-postman-api)
-9. [Using Newman in Docker](#using-newman-in-docker)
-10. [Using Socks Proxy](#using-socks-proxy)
-11. [Migration Guide](#migration-guide)
-12. [Compatibility](#compatibility)
-13. [Contributing](#contributing)
-14. [Community Support](#community-support)
-15. [License](#license)
+  - [Getting started](#getting-started)
+    - [Installation](#installation)
+      - [Using Homebrew](#using-homebrew)
+  - [Usage](#usage)
+    - [Using Newman CLI](#using-newman-cli)
+    - [Using Newman as a Library](#using-newman-as-a-library)
+    - [Using Reporters with Newman](#using-reporters-with-newman)
+  - [Command Line Options](#command-line-options)
+    - [`newman [options]`](#newman-options)
+    - [`newman run <collection-file-source> [options]`](#newman-run-collection-file-source-options)
+    - [SSL](#ssl)
+      - [Client Certificates](#client-certificates)
+      - [Using a single SSL client certificate](#using-a-single-ssl-client-certificate)
+      - [Using SSL client certificates configuration file (supports multiple certificates per run)](#using-ssl-client-certificates-configuration-file-supports-multiple-certificates-per-run)
+      - [Trusted CA](#trusted-ca)
+    - [Configuring Proxy](#configuring-proxy)
+  - [API Reference](#api-reference)
+    - [newman.run(options: _object_ , callback: _function_) => run: EventEmitter](#newmanrunoptions-object--callback-function--run-eventemitter)
+    - [newman.run~callback(error: _object_ , summary: _object_)](#newmanruncallbackerror-object--summary-object)
+    - [newman.run~events](#newmanrunevents)
+  - [Reporters](#reporters)
+    - [Configuring Reporters](#configuring-reporters)
+    - [CLI Reporter](#cli-reporter)
+    - [JSON Reporter](#json-reporter)
+    - [JUNIT/XML Reporter](#junitxml-reporter)
+    - [HTML Reporter](#html-reporter)
+  - [External Reporters](#external-reporters)
+    - [Using External Reporters](#using-external-reporters)
+      - [Community Maintained Reporters](#community-maintained-reporters)
+    - [Creating Your Own Reporter](#creating-your-own-reporter)
+  - [File uploads](#file-uploads)
+  - [Using Newman with the Postman API](#using-newman-with-the-postman-api)
+  - [Using Newman in Docker](#using-newman-in-docker)
+  - [Using Socks Proxy](#using-socks-proxy)
+  - [Migration Guide](#migration-guide)
+  - [Compatibility](#compatibility)
+    - [NodeJS](#nodejs)
+    - [File Encoding](#file-encoding)
+  - [Contributing](#contributing)
+  - [Community Support](#community-support)
+  - [License](#license)
 
 
 ## Getting started
@@ -685,6 +719,9 @@ Sign in using your Postman account to participate in the discussions and don't f
 
 
 ## License
-This software is licensed under Apache-2.0. Copyright Postdot Technologies, Inc. See the [LICENSE.md](LICENSE.md) file for more information.
 
-[![Analytics](https://ga-beacon.appspot.com/UA-43979731-9/newman/readme)](https://postman.com)
+[Apache-2.0 License](LICENSE.md) 
+<br>
+<br>
+Copyright 2021 Postdot Technologies, Inc. All rights reserved.
+

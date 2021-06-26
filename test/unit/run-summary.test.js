@@ -7,8 +7,8 @@ describe('run summary', function () {
         sdk = require('postman-collection'),
 
         TRACKED_EVENTS = ['iteration', 'item', 'script', 'prerequest', 'request', 'test', 'assertion',
-            'testScript', 'prerequestScript'],
-        SURROGATE_EVENTS = ['testScript', 'prerequestScript'];
+            'testScript', 'prerequestScript', 'skippedAssertion'],
+        SURROGATE_EVENTS = ['testScript', 'prerequestScript', 'skippedAssertion'];
 
     it('should require only an EventEmitter during construction', function () {
         expect(function () {

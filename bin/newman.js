@@ -115,15 +115,22 @@ program
         'Forces the request to be sent as PUT with the specified local file to the server', util.cast.memoize, [])
     .option('-x, --suppress-exit-code',
         'Specify whether or not to override the default exit code for the current request')
+    .option('-r, --reporters [reporters]', 'Specify the reporters to use for this run', util.cast.csvParse, ['cli'])
     .action((url, command) => {
         const options = util.commanderToObject(command),
+
+            // parse custom reporter options
+            reporterOptions = util.parseNestedOptions(program._originalArgs, '--reporter-', options.reporters),
 
             // convert the commander options object to a curl string
             curl = util.createCurl(options, url);
 
         // Inject additional properties into the options object
         options.curl = curl;
-
+        options.reporterOptions = reporterOptions._generic;
+        options.reporter = _.transform(_.omit(reporterOptions, '_generic'), (acc, value, key) => {
+            acc[key] = _.assignIn(value, reporterOptions._generic); // overrides reporter options with _generic
+        }, {});
         newman.request(options, function (err) {
             const requestErr = err;
 
